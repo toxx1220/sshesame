@@ -1,5 +1,5 @@
 server:
-  listen_address: 127.0.0.1:2022
+  listen_address: 0.0.0.0:2022
 
   # Host private key files.
   # If unspecified, null or empty, an RSA, ECDSA and Ed25519 key will be generated and stored.
@@ -8,12 +8,7 @@ server:
   # Fake internal services for handling direct-tcpip channels (`ssh -L`).
   # If unspecified or null, sensible defaults will be used.
   # If empty, no direct-tcpip channels will be accepted.
-  tcpip_services:
-    25: SMTP
-    80: HTTP
-    110: POP3
-    587: SMTP
-    8080: HTTP
+  tcpip_services: {}
 
 logging:
   # The log file to output activity logs to. Debug and error logs are still written to standard error.
@@ -43,7 +38,7 @@ auth:
   # The maximum number of authentication attempts permitted per connection.
   # If set to a negative number, the number of attempts are unlimited.
   # If unspecified, null or zero, a sensible default is used.
-  max_tries: 0
+  max_tries: -1
 
   password_auth:
     # Offer password authentication as an authentication option.
@@ -79,12 +74,12 @@ ssh_proto:
   # The version identification string to announce in the public handshake.
   # If unspecified or null, a reasonable default is used.
   # Note that RFC 4253 section 4.2 requires that this string start with "SSH-2.0-".
-  version: SSH-2.0-sshesame
+  version: SSH-2.0-OpenSSH_10.2p1 Debian-6
 
   # Sent to the client after key exchange completed but before authentication.
   # If unspecified or null, a reasonable default is used.
   # If empty, no banner is sent.
-  banner: This is an SSH honeypot. Everything is logged and monitored.
+  banner: ""
 
   # The maximum number of bytes sent or received after which a new key is negotiated. It must be at least 256.
   # If unspecified, null or 0, a size suitable for the chosen cipher is used.
